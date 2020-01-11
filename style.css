@@ -1,0 +1,44 @@
+.dateHolder {
+    width: 100%;
+}
+
+.dateBar {
+    text-align: center;
+    color: #333;
+    position: relative;
+    height: 33px;
+    padding: 3px;
+}
+
+ul {
+    list-style: none;
+}
+
+.dateShow {
+    color: grey;
+    margin: 0 5px;
+}
+
+.details {
+    position: absolute;
+    top: -30px;
+    padding-left: 10px;
+    height: 20px;
+    margin: 7px 0 0 0;
+}
+
+#formHolder {
+    background-color: #eeeeee;
+}
+
+.remove {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    z-index: 1000;
+}
+
+#addNewSecForm {
+    width: 35%;
+    min-width: 300px;
+}

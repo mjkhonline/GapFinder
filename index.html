@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GapFinder</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="description" content="an app to easily find timeline gaps in your resume">
+    <meta name="keywords" content="resume,cv,careers,job">
+    <meta name="author" content="Mohammad Javad Khademian, mjkhonline@live.com">
+</head>
+<body>
+<div class="container-fluid" id="app">
+    <div class="row">
+        <div class="col-12 p-1 mt-2">
+            <h1 class="text-center">Gap Finder</h1>
+            <div v-if="sections.length">
+                <ul>
+                    <li v-for="(section,index) in finalSections" :key="index">
+                        <div class="dateHolder">
+                            <div class="dateBar" :class="sectionClassType(section)"
+                                 :style="{width: calcWidth(section), marginLeft: calcMargin(section) }">
+                                {{duration(section.startDate,section.endDate)}} M
+                                <p class="details">{{section.title}}<small class="dateShow">{{showDate(section.startDate)}}
+                                    - {{showDate(section.endDate)}}</small>
+                                </p>
+                                <span v-if="section.type==='normal'" class="remove" title="click to remove"
+                                      @click="removeSection(index)">&times;</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div v-else><p class="alert alert-warning p-4 m-3">Add Some Sections Below.</p></div>
+        </div>
+        <div id="formHolder" class="col-12 p-4 mt-5">
+            <h2 class="h4">Add New Section</h2>
+            <form autocomplete="off" id="addNewSecForm" @submit.prevent="addSection">
+                <ul v-show="errors.length" class="alert alert-danger">
+                    <li v-for="error in errors">{{error}}</li>
+                </ul>
+                <div class="form-row mb-3">
+                    <div class="col">
+                        <label for="title">Title:</label>
+                        <input required id="title" type="text" class="form-control" placeholder="Title"
+                               v-model="newTitle">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="start-date">Start Date:</label>
+                        <input required id="start-date" type="month" class="form-control" v-model="newStartDate">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="end-date">End Date:</label>
+                        <input required id="end-date" type="month" class="form-control" v-model="newEndDate">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <button class="btn btn-success mx-2 w-25" type="submit">Add</button>
+                    <button class="btn btn-primary mx-2" type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
