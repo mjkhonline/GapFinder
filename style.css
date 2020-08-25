@@ -42,3 +42,14 @@ ul {
     width: 35%;
     min-width: 300px;
 }
+
+.fade-item {
+    transition: all 1s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+.fade-leave-active {
+    position: absolute;
+}

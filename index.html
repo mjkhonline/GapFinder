@@ -17,13 +17,14 @@
         <div class="col-12 p-1 mt-2">
             <h1 class="text-center">Gap Finder</h1>
             <div v-if="sections.length">
-                <ul>
-                    <li v-for="(section,index) in finalSections" :key="index">
+                <transition-group tag="ul" name="fade">
+                    <li v-for="(section,index) in finalSections" :key="index" class="fade-item">
                         <div class="dateHolder">
                             <div class="dateBar" :class="sectionClassType(section)"
                                  :style="{width: calcWidth(section), marginLeft: calcMargin(section) }">
-                                {{duration(section.startDate,section.endDate)}} M
-                                <p class="details">{{section.title}}<small class="dateShow">{{showDate(section.startDate)}}
+                                {{duration(section.startDate, section.endDate)}} M
+                                <p class="details">{{section.title}}<small
+                                        class="dateShow">{{showDate(section.startDate)}}
                                     - {{showDate(section.endDate)}}</small>
                                 </p>
                                 <span v-if="section.type==='normal'" class="remove" title="click to remove"
@@ -31,7 +32,7 @@
                             </div>
                         </div>
                     </li>
-                </ul>
+                </transition-group>
             </div>
             <div v-else><p class="alert alert-warning p-4 m-3">Add Some Sections Below.</p></div>
         </div>
